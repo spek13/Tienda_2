@@ -25,7 +25,7 @@ public class MetodoLogin {
         
         int resultado = 0;
         //Este es el error
-        String SSQL ="SELECT * FROM `usuarios` WHERE 1";
+        String SSQL ="SELECT * FROM `usuarios` WHERE usuario='"+usuario+"' && contraseña='"+clave+"'";
        
         Connection con = null; 
         
