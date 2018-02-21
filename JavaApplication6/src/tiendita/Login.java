@@ -98,12 +98,12 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
   
         if(metodologin.Validar_Ingreso()==1){
+            this.dispose();
+            JOptionPane.showMessageDialog(null, "Bienvenido Usuario.\n" + "Has Iniciado Correctamente", "Mensaje de bienvenida" ,JOptionPane.INFORMATION_MESSAGE);
             sistema sistema=new sistema();
             sistema.setVisible(true);
-            this.dispose();
-            JOptionPane.showMessageDialog(null, "Bienvenido Usuario, " + "has Iniciado Correctamente", "Mensake de bienvenida" ,JOptionPane.INFORMATION_MESSAGE);
         }else {
-            JOptionPane.showMessageDialog(null, "Error Al conectar, " + " Usuario/Contraseña Incorrectos", "" ,JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error Al conectar.\n" + " Usuario/Contraseña Incorrectos", "Mensaje de error" ,JOptionPane.ERROR_MESSAGE);
         }
         
     }//GEN-LAST:event_jButton1ActionPerformed
