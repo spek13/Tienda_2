@@ -107,7 +107,7 @@ public class sistema extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Damián Javier Mejía\\Desktop\\Nueva Carpeta (2)\\tienda\\JavaApplication5\\src\\Clases\\save.png")); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tiendita/save.png"))); // NOI18N
         jButton3.setText("Save");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
