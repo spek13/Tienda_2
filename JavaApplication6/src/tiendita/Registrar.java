@@ -65,6 +65,11 @@ public class Registrar extends javax.swing.JFrame {
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setSelected(true);
         jRadioButton2.setText("Cashier");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Damián Javier Mejía\\Desktop\\Nueva Carpeta (2)\\tienda\\JavaApplication5\\src\\Clases\\save.png")); // NOI18N
         jButton1.setText("Save");
@@ -152,6 +157,10 @@ public class Registrar extends javax.swing.JFrame {
             }
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     /**
      * @param args the command line arguments
