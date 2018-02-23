@@ -110,6 +110,11 @@ public class sistema extends javax.swing.JFrame {
                 jcantidadActionPerformed(evt);
             }
         });
+        jcantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jcantidadKeyReleased(evt);
+            }
+        });
 
         jLabel4.setText("Producto");
 
@@ -122,6 +127,11 @@ public class sistema extends javax.swing.JFrame {
         jcosto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcostoActionPerformed(evt);
+            }
+        });
+        jcosto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jcostoKeyReleased(evt);
             }
         });
 
@@ -429,16 +439,48 @@ public class sistema extends javax.swing.JFrame {
     private void jcodigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcodigoKeyReleased
         // TODO add your handling code here:
         ///code
- char caracter = evt.getKeyChar();
-
-      // Verificar si la tecla pulsada no es un digito
-     char code = evt.getKeyChar();
-      if((int)code>=48){
-         if((int)code<=57){
-            Character.toString(code);
-        } 
-      }
+        int k=(int)evt.getKeyChar();
+        if (k >= 97 && k <= 122 || k>=65 && k<=90){
+            evt.setKeyChar((char)KeyEvent.VK_CLEAR);
+            JOptionPane.showMessageDialog(null,"No puede ingresar letras!!!","Ventana Error Datos",JOptionPane.ERROR_MESSAGE);
+            jcodigo.setText(null);
+        }
+        if(k==241 || k==209){
+            evt.setKeyChar((char)KeyEvent.VK_CLEAR);
+            JOptionPane.showMessageDialog(null,"No puede ingresar letras!!!","Ventana Error Datos",JOptionPane.ERROR_MESSAGE);
+            jcodigo.setText(null);
+        }
     }//GEN-LAST:event_jcodigoKeyReleased
+
+    private void jcostoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcostoKeyReleased
+        // TODO add your handling code here:
+         int k=(int)evt.getKeyChar();
+        if (k >= 97 && k <= 122 || k>=65 && k<=90){
+            evt.setKeyChar((char)KeyEvent.VK_CLEAR);
+            JOptionPane.showMessageDialog(null,"No puede ingresar letras!!!","Ventana Error Datos",JOptionPane.ERROR_MESSAGE);
+            this.jcosto.setText(null);
+        }
+        if(k==241 || k==209){
+            evt.setKeyChar((char)KeyEvent.VK_CLEAR);
+            JOptionPane.showMessageDialog(null,"No puede ingresar letras!!!","Ventana Error Datos",JOptionPane.ERROR_MESSAGE);
+            this.jcosto.setText(null);
+        }
+    }//GEN-LAST:event_jcostoKeyReleased
+
+    private void jcantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jcantidadKeyReleased
+        // TODO add your handling code here:
+         int k=(int)evt.getKeyChar();
+        if (k >= 97 && k <= 122 || k>=65 && k<=90){
+            evt.setKeyChar((char)KeyEvent.VK_CLEAR);
+            JOptionPane.showMessageDialog(null,"No puede ingresar letras!!!","Ventana Error Datos",JOptionPane.ERROR_MESSAGE);
+            jcantidad.setText(null);
+        }
+        if(k==241 || k==209){
+            evt.setKeyChar((char)KeyEvent.VK_CLEAR);
+            JOptionPane.showMessageDialog(null,"No puede ingresar letras!!!","Ventana Error Datos",JOptionPane.ERROR_MESSAGE);
+            jcantidad.setText(null);
+        }
+    }//GEN-LAST:event_jcantidadKeyReleased
 
     /**
      * @param args the command line arguments
