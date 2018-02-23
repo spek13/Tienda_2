@@ -141,11 +141,11 @@ public class sistema extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3"
+                "Codido", "Nombre", "Costo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -153,9 +153,6 @@ public class sistema extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-        }
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
