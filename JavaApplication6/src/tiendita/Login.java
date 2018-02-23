@@ -100,6 +100,7 @@ public class Login extends javax.swing.JFrame {
         if(metodologin.Validar_Ingreso()==1){
             this.dispose();
             JOptionPane.showMessageDialog(null, "Bienvenido Usuario.\n" + "Has Iniciado Correctamente", "Mensaje de bienvenida" ,JOptionPane.INFORMATION_MESSAGE);
+            sistema.tipo=metodologin.valid_user(Usuariotxtfield.getText());
             sistema sistema=new sistema();
             sistema.setVisible(true);
         }else {
