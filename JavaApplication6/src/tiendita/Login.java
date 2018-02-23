@@ -44,6 +44,7 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setIconImage(getIconImage());
         setIconImages(null);
+        setResizable(false);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 51, 0));
@@ -148,6 +149,8 @@ public class Login extends javax.swing.JFrame {
     MetodoLogin metodologin = new MetodoLogin();
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        //#F0482B
+        //#FE6347
   
         if(metodologin.Validar_Ingreso()==1){
             this.dispose();
