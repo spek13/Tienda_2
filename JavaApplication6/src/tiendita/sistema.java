@@ -541,16 +541,17 @@ public class sistema extends javax.swing.JFrame {
         }
         
         if(new String(this.contraseña_reg.getPassword()).equals(new String(jPasswordField2.getPassword()))){
-                  
+            
+                  if (this.usuario_reg.getText().equals("")||new String(this.contraseña_reg.getPassword()).equals("")||new String(this.jPasswordField2.getPassword()).equals("")){
+                     JOptionPane.showMessageDialog(null, "Favor de llenar todos los campos.","Intente nuevamente",JOptionPane.ERROR_MESSAGE);
+                     }else {  
              coco.Validar_Insert(usuario_reg.getText(), new String(this.jPasswordField2.getPassword()),tpo_user);
-       
+                  }
          
         }else {
             JOptionPane.showMessageDialog(null, "Verificar contraseña","Contraseña diferente",JOptionPane.ERROR_MESSAGE);
         }
-        if (this.usuario_reg.getText().equals("")||new String(this.contraseña_reg.getPassword()).equals("")||new String(this.jPasswordField2.getPassword()).equals("")){
-            JOptionPane.showMessageDialog(null, "Favor de llenar todos los campos.","Intente nuevamente",JOptionPane.ERROR_MESSAGE);
-        }
+      
         
 
     }//GEN-LAST:event_jButton1ActionPerformed
