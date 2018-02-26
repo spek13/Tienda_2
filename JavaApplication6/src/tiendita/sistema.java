@@ -69,6 +69,7 @@ public class sistema extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
+        jToggleButton1 = new javax.swing.JToggleButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jcodigo = new javax.swing.JTextField();
@@ -178,6 +179,11 @@ public class sistema extends javax.swing.JFrame {
                 jTextField1ActionPerformed(evt);
             }
         });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 102, 0));
@@ -187,6 +193,13 @@ public class sistema extends javax.swing.JFrame {
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
+            }
+        });
+
+        jToggleButton1.setText("jToggleButton1");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
             }
         });
 
@@ -211,7 +224,9 @@ public class sistema extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4)))
+                        .addComponent(jButton4)
+                        .addGap(38, 38, 38)
+                        .addComponent(jToggleButton1)))
                 .addContainerGap(225, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -221,7 +236,8 @@ public class sistema extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton4))
+                    .addComponent(jButton4)
+                    .addComponent(jToggleButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -682,38 +698,111 @@ public class sistema extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         String pago;
-     int t=jTable1.getRowCount()-1;   
-
-  pago = JOptionPane.showInputDialog("¿Con cuanto paga?");
-  float pagado = Float.parseFloat(pago);
-  pagado =pagado - total;
-  JOptionPane.showMessageDialog(null, "Cambio "+pagado+" pesos");
-  System. out. println(pagado);
-for(int j=t;j>=0;j--){
-q.removeRow(j);
-
-}
-total=0;
-c=0;
-i=0;
- jLabel18.setText(String.valueOf(total));
- jLabel19.setText(String.valueOf(c));
+     int t=jTable1.getRowCount()-1; 
   
+    try{
+      pago = JOptionPane.showInputDialog("¿Con cuanto paga?");
+        float pagado=0;
+        pagado = Float.parseFloat(pago);
+        total=0;
+            for (i=0; i<c;i++){
+         total=total + new Float( jTable1.getValueAt(i, 2).toString());
+
+        }
+            pagado =pagado - total;
+          
+     if (pagado>=0){
+        
+         
+     
+       
+        
+        JOptionPane.showMessageDialog(null, "Cambio "+pagado+" pesos");
+        System. out. println(pagado);
+    for(int j=t;j>=0;j--){
+        q.removeRow(j);
+          jLabel18.setText(String.valueOf(0.00));
+    jLabel19.setText(String.valueOf(0));
+
+    }
+   
+     
+    
+    total=0;
+    c=0;
+    i=0;
+  
+     }else {
+         JOptionPane.showMessageDialog(null,"Error no se puede hacer venta ","no se puede hacer compra",JOptionPane.ERROR_MESSAGE);
+     }
+            
+    }catch(Exception e){
+ 
+            
+}
+
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    npc.ADD_producto(jTextField1.getText());        // TODO add your handling code here:
+    
+    int x=1,y=1;
+    
+    npc.setCobro(jTextField1.getText(),x,y);
+    int l=y;
+     JOptionPane.showMessageDialog(null,"valor"+l,"no se puede hacer compra",JOptionPane.ERROR_MESSAGE);
+     
+        if (l==l){
+            JOptionPane.showMessageDialog(null,"valor"+y,"no se puede hacer compra",JOptionPane.ERROR_MESSAGE);
+     
+    npc.ADD_producto(jTextField1.getText()); 
+    // TODO add your handling code here:
+    MetodoLogin coco= new MetodoLogin();
+    total=0;
+    jLabel19.setText(String.valueOf(jTable1.getRowCount()));
+    c = jTable1.getRowCount();
+    
+    for (i=0; i<c;i++){
+        total=total + new Float( jTable1.getValueAt(i, 2).toString());
+          
+    }
+    
+        
+    jLabel18.setText(String.valueOf(total));
+        }
+    total=0;
+        
+    
+     jTextField1.setText("");
+     
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+        if(jTable1.getRowCount()>=0){
+           // total = total - Float.parseFloat(jTable1.getValueAt(jTable1.getSelectedRow(),2).toString());
+            q.removeRow(jTable1.getSelectedRow());
+            JOptionPane.showMessageDialog(null,total);
+        }
+        
     
     jLabel19.setText(String.valueOf(jTable1.getRowCount()));
     c = jTable1.getRowCount();
     
-    for (i=i; i<c;i++){
+    for (i=0; i<c;i++){
         total=total + new Float( jTable1.getValueAt(i, 2).toString());
+        
     }
     
-    jLabel18.setText(String.valueOf(total));
     
-    }//GEN-LAST:event_jButton4ActionPerformed
+    jLabel18.setText(String.valueOf(total));
+    total=0;
+        
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1KeyPressed
 
     /**
      * @param args the command line arguments
@@ -790,10 +879,13 @@ i=0;
     private javax.swing.JTabbedPane jTabbedPane1;
     public static javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTextField jcantidad;
     private javax.swing.JTextField jcodigo;
     private javax.swing.JTextField jcosto;
     private javax.swing.JTextField jproducto;
     public static javax.swing.JTextField usuario_reg;
     // End of variables declaration//GEN-END:variables
+
+
 }
