@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Damián Javier Mejía y Arturo Nieva
  */
 public class MetodoLogin {
-     String barras;
+    
     Pool metodospool = new Pool();
     
     public int Validar_Ingreso(){
@@ -26,7 +26,6 @@ public class MetodoLogin {
         String clave = String.valueOf(Login.Contraseña.getPassword());
         
         int resultado = 0;
-        //Este es el error
         String SSQL ="SELECT * FROM `usuarios` WHERE usuario='"+usuario+"' && contraseña='"+clave+"'";
     
         
@@ -116,7 +115,7 @@ public class MetodoLogin {
             if(rs.next()){
                 tipo=rs.getInt(1);
             }
-        }catch(Exception e){
+        }catch(SQLException e){
             JOptionPane.showMessageDialog(null,e.getMessage(),"Error",JOptionPane.INFORMATION_MESSAGE);
         }
         return tipo;
@@ -153,10 +152,8 @@ public int Update_Insert_user(String usuario,String clave,int tpo_user){ //modif
             st.setString(1, barra);
             ResultSet rs = st.executeQuery();
             
-            
             Object []tabla = new Object[4];
             if(rs.next()){
-                barras=rs.getString(1);
                 tabla[0]=rs.getString(1);
                 tabla[1]=rs.getString(2);
                 tabla[2]=rs.getString(3);
@@ -178,79 +175,43 @@ public int Update_Insert_user(String usuario,String clave,int tpo_user){ //modif
         return sistema.q;
         
     }
- 
- 
- 
-public int modificarProductos(String id){ //modificar usuario 
-
-
-        try{
-         int existencia=0;
-    	String SSQL_UPDATE = "UPDATE productos SET existencia= ? WHERE  id= ?";
-        String mySql= "SELECT * FROM productos WHERE codigo_de_barras= ?";
-             Connection con = null; 
-            con = metodospool.dataSource.getConnection();
-            PreparedStatement st = con.prepareStatement(SSQL_UPDATE);
-            PreparedStatement sin = con.prepareStatement(mySql);
-            sin.setString(1, id);
-           
-        if(existencia>0){  
-
-        	existencia=existencia-1;
-            st.setInt(1, existencia);
-            st.setString(2, id);
-            
-         }
-
-            int res = st.executeUpdate();
-            if (res > 0){
-                JOptionPane.showMessageDialog(null,"Resgistro Guardado con Exito","Exito",JOptionPane.INFORMATION_MESSAGE);
-            }
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage(),"Error", JOptionPane.ERROR_MESSAGE);
-        }
-        return 0;
-    }  
-
-public void setCobro(String code, int cant,int opcion) {
-        int existencia=0;
-        Connection con = null; 
+    public void cobrar(String codigo, int cantidad, int opcion){
+        int existencia = 0;
+        Connection con = null;
+        String SSQL_SELECT = "SELECT * FROM productos WHERE codigo_de_barras= ?";
+        String SSQL_UPDATE = "UPDATE productos SET existencia= ? WHERE id_Code= ?";
+        
         if(opcion==1){
-            try{
-                PreparedStatement PS = metodospool.dataSource.getConnection().prepareStatement("SELECT existencia FROM productos WHERE codigo_de_barras= ?");
-                PS.setString(1, code);
-                ResultSet RS = PS.executeQuery();
-                if (RS.next()){
-                    existencia = RS.getInt(1);
-                } 
-            }catch(SQLException e){
-                System.out.println("Error: "+ e.getMessage());
+            try {
+            con = metodospool.dataSource.getConnection();
+            PreparedStatement st = con.prepareStatement(SSQL_SELECT);
+            st.setString(1, codigo);  
+            ResultSet rs = st.executeQuery();
+            if(rs.next()){
+                existencia = rs.getInt(1);
+            }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex,"Error de conexion", JOptionPane.ERROR_MESSAGE);
+            } finally{
+                con = null;
+                ResultSet Rs = null;
+            }
+            existencia = existencia - cantidad;
+            try {
+                con = metodospool.dataSource.getConnection();
+                PreparedStatement st = con.prepareStatement(SSQL_UPDATE);
+                st.setInt(1, existencia); 
+                st.setString(1, codigo);  
+                ResultSet rs = st.executeQuery();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex,"Error de conexion", JOptionPane.ERROR_MESSAGE);
             }finally{
-                 Connection PS = null;
-                Connection RS = null;
-            }
-            if (existencia > 0){
-               
-            
-            existencia=existencia-cant;
-            }
-            try{
-               PreparedStatement PS = metodospool.dataSource.getConnection().prepareStatement("UPDATE productos SET existencia= ? WHERE codigo_de_barras= ?");
-                PS.setInt(1,existencia);
-                PS.setString(2, code);
-                int y = PS.executeUpdate();
-
-            }catch(SQLException e){
-                JOptionPane.showMessageDialog(null,e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
-            }finally{
-                Connection PS=null;
-                Connection RS=null;
-            }
+                con = null;
+                ResultSet Rs = null;
+            }            
         }
-        
-        
     }
-public int setSumar(String code, int cant) {
+    public int setSumar(String code, int cant) {
         int existencia=0;
         Connection con = null; 
         
@@ -268,9 +229,8 @@ public int setSumar(String code, int cant) {
                  Connection PS = null;
                 Connection RS = null;
             }
-            //if (existencia > 0){
+
             existencia=existencia+(cant);
-            //}
             try{
                PreparedStatement PS = metodospool.dataSource.getConnection().prepareStatement("UPDATE productos SET existencia= ? WHERE codigo_de_barras= ?");
                 PS.setInt(1,existencia);
@@ -283,9 +243,6 @@ public int setSumar(String code, int cant) {
                 Connection PS=null;
                 Connection RS=null;
             } 
-         return existencia;
+            return existencia;
+        }
     }
-}
-
-
-
