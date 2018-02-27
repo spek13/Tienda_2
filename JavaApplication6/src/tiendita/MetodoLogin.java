@@ -152,23 +152,29 @@ public int Update_Insert_user(String usuario,String clave,int tpo_user){ //modif
             PreparedStatement st = con.prepareStatement(SSQL_UPDATE);
             st.setString(1, barra);
             ResultSet rs = st.executeQuery();
-            //int existen=s.getInt(3)
+            
          
         
-                  
-           // if (a >= 1){
-            
-            Object []tabla = new Object[4];
-            if(rs.next()){
-                barras=rs.getString(1);
-                tabla[0]=rs.getString(1);
-                tabla[1]=rs.getString(2);
-                tabla[2]=rs.getString(3);
-                tabla[3]=rs.getString(4);
-                sistema.q.addRow(tabla);
+               Object []tabla = new Object[4];  
+
+            if(rs.next()){ 
+
+                int existen= rs.getInt(4);
                 
+                if (existen >= 1){
+
+                    barras=rs.getString(1);
+                    tabla[0]=rs.getString(1);
+                    tabla[1]=rs.getString(2);
+                    tabla[2]=rs.getString(3);
+                    tabla[3]=rs.getString(4);
+                    sistema.q.addRow(tabla);
+
+                }else {
+                    JOptionPane.showMessageDialog(null,"Ya no existen productos de ese tipo ","ERROR",JOptionPane.ERROR_MESSAGE);
+            
+                }
             }
-        //} 
         }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex,"Error de conexion", JOptionPane.ERROR_MESSAGE);
         } finally{

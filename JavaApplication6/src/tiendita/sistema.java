@@ -196,7 +196,7 @@ public class sistema extends javax.swing.JFrame {
             }
         });
 
-        jToggleButton1.setText("jToggleButton1");
+        jToggleButton1.setText("Borrar");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton1ActionPerformed(evt);
@@ -226,7 +226,7 @@ public class sistema extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jButton4)
                         .addGap(38, 38, 38)
-                        .addComponent(jToggleButton1)))
+                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(225, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -731,7 +731,7 @@ public class sistema extends javax.swing.JFrame {
     total=0;
     c=0;
     i=0;
-  
+    jTextField1.requestFocus();
      }else {
          JOptionPane.showMessageDialog(null,"Error no se puede hacer venta ","no se puede hacer compra",JOptionPane.ERROR_MESSAGE);
      }
@@ -739,7 +739,7 @@ public class sistema extends javax.swing.JFrame {
     }catch(Exception e){
  
             
-}
+    }
 
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -771,6 +771,7 @@ public class sistema extends javax.swing.JFrame {
     
     jLabel18.setText(String.valueOf(total));
     total=0;
+    jTextField1.requestFocus();
         
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
