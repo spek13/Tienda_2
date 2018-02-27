@@ -250,41 +250,6 @@ public void setCobro(String code, int cant,int opcion) {
         
         
     }
-public int setSumar(String code, int cant) {
-        int existencia=0;
-        Connection con = null; 
-        
-       
-            try{
-                PreparedStatement PS = metodospool.dataSource.getConnection().prepareStatement("SELECT existencia FROM productos WHERE codigo_de_barras= ?");
-                PS.setString(1, code);
-                ResultSet RS = PS.executeQuery();
-                if (RS.next()){
-                    existencia = RS.getInt(1);
-                } 
-            }catch(SQLException e){
-                 JOptionPane.showMessageDialog(null, e.getMessage(),"Error", JOptionPane.ERROR_MESSAGE);
-            }finally{
-                 Connection PS = null;
-                Connection RS = null;
-            }
-            //if (existencia > 0){
-            existencia=existencia+(cant);
-            //}
-            try{
-               PreparedStatement PS = metodospool.dataSource.getConnection().prepareStatement("UPDATE productos SET existencia= ? WHERE codigo_de_barras= ?");
-                PS.setInt(1,existencia);
-                PS.setString(2, code);
-                int y = PS.executeUpdate();
-
-            }catch(SQLException e){
-                JOptionPane.showMessageDialog(null,e.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
-            }finally{
-                Connection PS=null;
-                Connection RS=null;
-            } 
-         return existencia;
-    }
 }
 
 
