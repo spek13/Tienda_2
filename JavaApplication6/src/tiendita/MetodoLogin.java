@@ -152,7 +152,11 @@ public int Update_Insert_user(String usuario,String clave,int tpo_user){ //modif
             PreparedStatement st = con.prepareStatement(SSQL_UPDATE);
             st.setString(1, barra);
             ResultSet rs = st.executeQuery();
-            
+            //int existen=s.getInt(3)
+         
+        
+                  
+           // if (a >= 1){
             
             Object []tabla = new Object[4];
             if(rs.next()){
@@ -164,7 +168,8 @@ public int Update_Insert_user(String usuario,String clave,int tpo_user){ //modif
                 sistema.q.addRow(tabla);
                 
             }
-        } catch (SQLException ex) {
+        //} 
+        }catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex,"Error de conexion", JOptionPane.ERROR_MESSAGE);
         } finally{
             try {
@@ -212,10 +217,11 @@ public int modificarProductos(String id){ //modificar usuario
         return 0;
     }  
 
-public void setCobro(String code, int cant,int opcion) {
+public void setCobro(String code, int cant) {
         int existencia=0;
         Connection con = null; 
-        if(opcion==1){
+        System.out.println(cant);
+       
             try{
                 PreparedStatement PS = metodospool.dataSource.getConnection().prepareStatement("SELECT existencia FROM productos WHERE codigo_de_barras= ?");
                 PS.setString(1, code);
@@ -232,7 +238,12 @@ public void setCobro(String code, int cant,int opcion) {
             if (existencia > 0){
                
             
-            existencia=existencia-cant;
+            existencia=existencia-(cant);
+            }
+            if(cant==-1){
+               
+            
+            existencia=existencia-(cant);
             }
             try{
                PreparedStatement PS = metodospool.dataSource.getConnection().prepareStatement("UPDATE productos SET existencia= ? WHERE codigo_de_barras= ?");
@@ -246,7 +257,7 @@ public void setCobro(String code, int cant,int opcion) {
                 Connection PS=null;
                 Connection RS=null;
             }
-        }
+        
         
         
     }

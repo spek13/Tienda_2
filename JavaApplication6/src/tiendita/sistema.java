@@ -745,45 +745,19 @@ public class sistema extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    
-    int x=1,y=1;
-    
-    npc.setCobro(jTextField1.getText(),x,y);
-    int l=y;
-     JOptionPane.showMessageDialog(null,"valor"+l,"no se puede hacer compra",JOptionPane.ERROR_MESSAGE);
-     
-        if (l==l){
-            JOptionPane.showMessageDialog(null,"valor"+y,"no se puede hacer compra",JOptionPane.ERROR_MESSAGE);
-     
-    npc.ADD_producto(jTextField1.getText()); 
-    // TODO add your handling code here:
-    MetodoLogin coco= new MetodoLogin();
-    total=0;
-    jLabel19.setText(String.valueOf(jTable1.getRowCount()));
-    c = jTable1.getRowCount();
-    
-    for (i=0; i<c;i++){
-        total=total + new Float( jTable1.getValueAt(i, 2).toString());
-          
-    }
-    
-        
-    jLabel18.setText(String.valueOf(total));
-        }
-    total=0;
-        
-    
-     jTextField1.setText("");
-     
+    AddProducts();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
-        if(jTable1.getRowCount()>=0){
-           // total = total - Float.parseFloat(jTable1.getValueAt(jTable1.getSelectedRow(),2).toString());
-            q.removeRow(jTable1.getSelectedRow());
-            JOptionPane.showMessageDialog(null,total);
-        }
+        int x=-1;
+        npc.setCobro(jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString(),x);
+        
+    if(jTable1.getRowCount()>=0){
+       // total = total - Float.parseFloat(jTable1.getValueAt(jTable1.getSelectedRow(),2).toString());
+        q.removeRow(jTable1.getSelectedRow());
+        JOptionPane.showMessageDialog(null,total);
+    }
         
     
     jLabel19.setText(String.valueOf(jTable1.getRowCount()));
@@ -802,6 +776,9 @@ public class sistema extends javax.swing.JFrame {
 
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
         // TODO add your handling code here:
+         if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+               AddProducts();
+         }
     }//GEN-LAST:event_jTextField1KeyPressed
 
     /**
@@ -887,5 +864,33 @@ public class sistema extends javax.swing.JFrame {
     public static javax.swing.JTextField usuario_reg;
     // End of variables declaration//GEN-END:variables
 
+    public void AddProducts(){
+      int x=1;
+    
+    npc.setCobro(jTextField1.getText(),x);
+  
+     //JOptionPane.showMessageDialog(null,"valor"+l,"no se puede hacer compra",JOptionPane.ERROR_MESSAGE);
+     
+        
+    npc.ADD_producto(jTextField1.getText()); 
+    // TODO add your handling code here:
+    MetodoLogin coco= new MetodoLogin();
+    total=0;
+    jLabel19.setText(String.valueOf(jTable1.getRowCount()));
+    c = jTable1.getRowCount();
+    
+    for (i=0; i<c;i++){
+        total=total + new Float( jTable1.getValueAt(i, 2).toString());
+          
+    }
+    
+        
+    jLabel18.setText(String.valueOf(total));
+        
+    total=0;
+        
+    
+     jTextField1.setText("");
+    }
 
 }
