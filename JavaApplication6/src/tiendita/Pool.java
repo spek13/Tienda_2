@@ -15,8 +15,8 @@ import org.apache.commons.dbcp.BasicDataSource;
 public class Pool {
     public DataSource dataSource;
     public String db = "tiendita";
-    public String url = "jdbc:mysql://Spek:3306/"+db;
-    public String user = "Damian";
+    public String url = "jdbc:mysql://localhost:3306/"+db;
+    public String user = "root";
     public String pass = "";
     
     public Pool(){
